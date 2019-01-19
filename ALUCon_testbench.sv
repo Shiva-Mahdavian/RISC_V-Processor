@@ -10,7 +10,7 @@ module ALUCon_testbench();
 	ALUControlUnit dut(f7, f3, aluOp, con);
 	
 	initial begin
-		aluOp = 2'b10;
+		aluOp = 2'b10; //R-type
 		{f7, f3} = 10'b0000000000; #10;
 		assert (con === 4'b0010) else $error("dp 10, add failed %b", con);
 		{f7, f3} = 10'b0100000000; #10;
@@ -19,11 +19,11 @@ module ALUCon_testbench();
 		assert (con === 4'b0000) else $error("dp 10, and failed %b", con);
 		{f7, f3} = 10'b0000000110; #10;
 		assert (con === 4'b0001) else $error("dp 10, or failed %b", con);
-		aluOp = 2'b00; #10;
+		aluOp = 2'b00; #10; // ld, sd
 		assert (con === 4'b0010) else $error("memory, add failed %b", con);
-		aluOp = 2'b01; #10;
+		aluOp = 2'b01; #10; // beq
 		assert (con === 4'b0110) else $error("branch, sub failed %b", con);
-		aluOp = 2'b11;
+		aluOp = 2'b11; //R-type
 		{f7, f3} = 10'b0000000000; #10;
 		assert (con === 4'b0010) else $error("dp 11, add failed %b", con);
 		{f7, f3} = 10'b0100000000; #10;
