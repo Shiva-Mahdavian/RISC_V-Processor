@@ -4,12 +4,15 @@ module registers(input  logic 	     clk,
 		 input  logic [63:0] WriteData,
 		 output logic [63:0] ReadData1, ReadData2);
 		 
-	logic [63:0] regs[63:0];
+	logic [63:0] regs[31:0];
 	
-	//assign regs[0] = 0; //TODO: x0 is always zero :-?
+
+	initial begin
+		$readmemb("regfile.dat", regs);//X0 always is zero
+	end
 	
 	always_ff @(posedge clk)
-		if (RegWrite) regs[WriteReg] <= WriteData;
+		if (RegWrite & WriteReg != 0) regs[WriteReg] <= WriteData; //Reg != X0
 	
 	assign ReadData1 = regs[ReadReg1];
 	assign ReadData2 = regs[ReadReg2];
