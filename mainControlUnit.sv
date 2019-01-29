@@ -14,6 +14,7 @@ module mainControlUnit(input  logic [6:0] OPCode,
 			7'b0000011: controls = 8'b01100011; //Load
 			7'b0100011: controls = 8'b00x00110; //Store
 			7'b1100011: controls = 8'b10x01000; //Branch equal
+			default: controls = 8'b00000000;
 		endcase
 		
 	assign {Branch, MemRead, MemtoReg, ALUOp, MemWrite, ALUSrc, RegWrite} = controls;

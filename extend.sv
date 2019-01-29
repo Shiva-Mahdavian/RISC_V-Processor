@@ -12,6 +12,7 @@ module extend(input  logic signed [31:0] in,
 			7'b0100011: out = {{52{in[31]}},in[31:25],in[11:7]};
 			//2th complement shifted branch
 			7'b1100011: out = {{52{in[31]}}, in[31], in[7], in[30:25], in[11:8]};
+			default: out = 64'b0;
 		endcase
 	      
 endmodule	     
