@@ -9,9 +9,13 @@ module dataMem(input  logic 	clk, we, re,
 		$readmemb("dmem.dat",RAM); //initialize data memory
 	end
 	
+	always_comb 
+		if (re) rd = RAM[a[63:3]]; // double-word aligned
+		else 	rd = 64'bx;
+		
 	always_ff @(posedge clk) begin
 		if (we) RAM[a[63:3]] <= wd;
-		if (re) rd = RAM[a[63:3]]; // double-word aligned
+		
 	end 
 
 endmodule
