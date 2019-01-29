@@ -2,7 +2,7 @@ module controlUnit(input  logic [6:0] funct7,
 		   input  logic [2:0] funct3,
 		   input  logic [6:0] OPCode,
 		   input  logic       Zero,
-		   output logic       BranchEqual,
+		   output logic       PCSrc, //beq
 		   output logic       MemRead,
 		   output logic       MemtoReg,
 		   output logic [3:0] ALUOperation,
@@ -15,6 +15,6 @@ module controlUnit(input  logic [6:0] funct7,
 	
 	mainControlUnit mainCon(OPCode, Branch, MemRead, MemtoReg, ALUOp, MemWrite, ALUSrc, RegWrite);
 	ALUControlUnit  aluCon (funct7, funct3, ALUOp, ALUOperation);
-	assign BranchEqual = Branch & Zero;
+	assign PCSrc = Branch & Zero;
 	
 endmodule
